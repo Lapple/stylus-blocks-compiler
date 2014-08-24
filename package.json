@@ -1,0 +1,24 @@
+{
+  "name": "stylus-blocks-compiler",
+  "version": "0.0.0",
+  "description": "Caching Stylus compiler optimized for incremental builds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Lapple/stylus-blocks-compiler.git"
+  },
+  "keywords": [
+    "stylus",
+    "incremental",
+    "large-scale"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lapple/stylus-blocks-compiler/issues"
+  },
+  "homepage": "https://github.com/Lapple/stylus-blocks-compiler"
+}
