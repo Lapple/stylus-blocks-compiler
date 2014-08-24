@@ -1,6 +1,5 @@
 var fs = require('fs');
 var path = require('path');
-var spawn = require('child_process').spawn;
 
 var _ = require('lodash');
 var async = require('async');
@@ -8,6 +7,7 @@ var async = require('async');
 var LINEFEED = require('os').EOL;
 
 var cacher = require('./lib/cacher');
+var compiler = require('./lib/compiler');
 var getCachedFilename = require('./util/get-cached-filename');
 
 module.exports = function(params) {
@@ -23,13 +23,11 @@ module.exports = function(params) {
             throw err;
         }
 
-        var s = spawnStylus(options.flags);
+        var comp = compiler(options.flags);
 
-        s.stdout.pipe(fs.createWriteStream(options.output));
-        s.stdout.pipe(cacher(options.blocks));
-
-        s.stdin.write(styles.join(LINEFEED));
-        s.stdin.end();
+        comp.pipe(fs.createWriteStream(options.output));
+        comp.pipe(cacher(options.blocks));
+        comp.end(styles.join(LINEFEED));
     });
 
     function getBlockCode(filepath, done) {
@@ -81,12 +79,6 @@ module.exports = function(params) {
             // cached.mtime.getTime() > dependantsMtime.getTime();
     }
 };
-
-function spawnStylus(flags) {
-    return spawn('stylus', flags, {
-        stdio: ['pipe', 'pipe', process.stderr]
-    });
-}
 
 function wrapInCSSLiteral(code) {
     return [ '@css {', code, '}' ].join(LINEFEED);
