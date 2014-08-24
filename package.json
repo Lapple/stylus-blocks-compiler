@@ -1,10 +1,10 @@
 {
   "name": "stylus-blocks-compiler",
   "version": "0.0.0",
-  "description": "Caching Stylus compiler optimized for incremental builds",
+  "description": "Caching Stylus build wrapper optimized for incremental builds",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodeunit test"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/Lapple/stylus-blocks-compiler/issues"
   },
-  "homepage": "https://github.com/Lapple/stylus-blocks-compiler"
+  "homepage": "https://github.com/Lapple/stylus-blocks-compiler",
+  "dependencies": {
+    "stylus": "^0.48.1",
+    "lodash": "^2.4.1",
+    "async": "^0.9.0"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.0"
+  }
 }
