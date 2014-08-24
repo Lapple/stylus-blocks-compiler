@@ -1,10 +1,8 @@
 var fs = require('fs');
-var path = require('path');
+var LINEFEED = require('os').EOL;
 
 var _ = require('lodash');
 var async = require('async');
-
-var LINEFEED = require('os').EOL;
 
 var cacher = require('./lib/cacher');
 var compiler = require('./lib/compiler');
@@ -17,6 +15,8 @@ module.exports = function(params) {
         wrap: true,
         flags: []
     });
+
+    var DEPENDANTS_MTIME = getLatestModificationTime(options.dependants);
 
     async.map(options.blocks, getBlockCode, function(err, styles) {
         if (err) {
@@ -75,8 +75,8 @@ module.exports = function(params) {
 
     function isCacheValid(original, cached) {
         return cached && original &&
-            cached.mtime.getTime() > original.mtime.getTime() // &&
-            // cached.mtime.getTime() > dependantsMtime.getTime();
+            cached.mtime.getTime() > original.mtime.getTime() &&
+            cached.mtime.getTime() > DEPENDANTS_MTIME.getTime();
     }
 };
 
@@ -86,4 +86,8 @@ function wrapInCSSLiteral(code) {
 
 function readFile(filepath, done) {
     fs.readFile(filepath, { encoding: 'utf8' }, done);
+}
+
+function getLatestModificationTime(filepaths) {
+    return _.min(_.pluck(_.map(filepaths, fs.statSync), 'mtime'));
 }

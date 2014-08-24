@@ -7,7 +7,7 @@ exports.compiles = function(test) {
             'test/fixtures/input.styl'
         ],
         dependants: [
-            'Gruntfile.js'
+            'package.json'
         ],
         output: 'test/comp.styl',
         flags: ['--include-css', '--resolve-url']
