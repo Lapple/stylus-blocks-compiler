@@ -89,5 +89,5 @@ function readFile(filepath, done) {
 }
 
 function getLatestModificationTime(filepaths) {
-    return _.min(_.pluck(_.map(filepaths, fs.statSync), 'mtime'));
+    return _.max(_.pluck(_.map(filepaths, fs.statSync), 'mtime'));
 }
