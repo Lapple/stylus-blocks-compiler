@@ -25,7 +25,8 @@
     "stylus": "^0.48.1",
     "lodash": "^2.4.1",
     "async": "^0.9.0",
-    "duplexer": "^0.1.1"
+    "event-stream": "^3.1.7",
+    "join-stream": "0.0.0"
   },
   "devDependencies": {
     "nodeunit": "^0.9.0"
