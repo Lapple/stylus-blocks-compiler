@@ -9,8 +9,7 @@ exports.compiles = function(test) {
         dependants: [
             'package.json'
         ],
-        output: 'test/comp.styl',
         flags: ['--include-css', '--resolve-url']
-    });
+    }).pipe(process.stdout);
     test.done();
 };

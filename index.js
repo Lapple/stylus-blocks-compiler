@@ -12,11 +12,14 @@ module.exports = function(params) {
         flags: []
     });
 
-    var DEPENDANTS_MTIME = getLatestModificationTime(options.dependants);
-    var comp = reader(options.blocks).pipe(compiler(options.flags));
+    var dependantsMtime = getLatestModificationTime(options.dependants);
 
-    comp.pipe(fs.createWriteStream(options.output));
-    comp.pipe(cacher(options.blocks));
+    var reading = reader(options.blocks);
+    var compilation = reading.pipe(compiler(options.flags, dependantsMtime));
+
+    compilation.pipe(cacher(options.blocks));
+
+    return compilation;
 };
 
 function getLatestModificationTime(filepaths) {
