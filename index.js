@@ -9,13 +9,13 @@ module.exports = function(params) {
     var options = _.defaults(params, {
         blocks: [],
         dependants: [],
-        flags: []
+        stylus: require('stylus')
     });
 
     var dependantsMtime = getLatestModificationTime(options.dependants);
 
-    var reading = reader(options.blocks);
-    var compilation = reading.pipe(compiler(options.flags, dependantsMtime));
+    var reading = reader(options.blocks, dependantsMtime);
+    var compilation = reading.pipe(compiler(options.stylus));
 
     compilation.pipe(cacher(options.blocks));
 
