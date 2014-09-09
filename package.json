@@ -1,7 +1,7 @@
 {
   "name": "stylus-blocks-compiler",
   "version": "0.0.2",
-  "description": "Caching Stylus build wrapper optimized for incremental builds",
+  "description": "Stylus build wrapper optimized for incremental builds",
   "main": "index.js",
   "scripts": {
     "test": "nodeunit test"

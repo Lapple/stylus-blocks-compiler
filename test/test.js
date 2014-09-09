@@ -5,10 +5,8 @@ exports.compiles = function(test) {
         blocks: [
             'test/fixtures/button.styl',
             'test/fixtures/input.styl'
-        ],
-        dependants: [
-            'package.json'
         ]
-    }).pipe(process.stdout);
-    test.done();
+    })
+    .on('end', test.done)
+    .pipe(process.stdout);
 };
