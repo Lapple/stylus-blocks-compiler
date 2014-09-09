@@ -1,6 +1,6 @@
 {
   "name": "stylus-blocks-compiler",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Stylus build wrapper optimized for incremental builds",
   "main": "index.js",
   "scripts": {
